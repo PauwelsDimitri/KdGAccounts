@@ -1,0 +1,44 @@
+﻿@model Accounts.Models.KdgrightsGroupPropertie
+@{
+    ViewData["Title"] = "Propertie verwijderen";
+    var RGId = Model.RGId;
+}
+
+<h4>Propertie verwijderen</h4>
+
+<h5>Wil je deze echt verwijderen?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Field)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Field)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Verwijderen" class="btn btn-outline-dark btn-sm" />
+        <br />
+        <br />
+        <a asp-action="Create" asp-route-id="@RGId">Terug</a>
+    </form>
+</div>
+<div class="footer-spacing">
+
+</div>
+

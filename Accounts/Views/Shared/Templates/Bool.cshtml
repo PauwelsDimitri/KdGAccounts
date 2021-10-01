@@ -1,0 +1,10 @@
+﻿@model bool?
+
+@if (Model == true)
+{
+    @Html.Encode("Ja")
+}
+@if (Model == false)
+{
+    @Html.Encode("Nee")
+}

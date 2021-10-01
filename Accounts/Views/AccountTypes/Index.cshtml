@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Accounts.Models.AccountType>
+
+@{
+    ViewData["Title"] = "Account Types";
+}
+
+<h4>Account Types</h4>
+
+<p>
+    <a asp-action="Create">Nieuw aanmaken</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailExt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountExt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeleteAfter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateAllowed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailExt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountExt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeleteAfter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateAllowed)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Wijzig</a> |
+                    <a asp-controller="AccountTypeRoles" asp-action="Create" asp-route-id="@item.Id">Rechten</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="footer-spacing">
+
+</div>
+

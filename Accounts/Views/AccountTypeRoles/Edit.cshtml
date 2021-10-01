@@ -1,0 +1,59 @@
+﻿@using Accounts.Models;
+@model Accounts.Models.AccountTypeRole;
+
+@{
+    IEnumerable<AccountTypeRole> roles = (IEnumerable<AccountTypeRole>)ViewData["Roles"];
+    AccountType accounttype = (AccountType)ViewData["AccountType"];
+    var AccountType = Model.AccountType;
+}
+
+
+<div>
+    <h4>@accounttype.Name</h4>
+    <hr />
+    <h4>Rollen</h4>
+    <dl class="dl-horizontal">
+        @foreach (var role in roles)
+        {
+            <dt>
+                Rol
+            </dt>
+            <dd>
+                @role.Role (<a asp-action="Edit" asp-route-id="@role.Id">Wijzig</a> | <a asp-action="Delete" asp-route-id="@role.Id" asp-route-src="AccountType">Verwijder</a> )
+            </dd>
+        }
+    </dl>
+
+
+</div>
+<h4>Rol wijzigen</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="AccountType" />
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <input asp-for="Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Opslaan" class="btn btn-outline-dark btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Create" asp-route-id="@AccountType">Terug</a>
+    </p>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

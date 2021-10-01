@@ -1,0 +1,49 @@
+﻿@model Accounts.Models.KdgrightsGroup
+
+@{
+    ViewData["Title"] = "Rechtengroep verwijderen";
+}
+
+<h4>Rechtengroep verwijderen</h4>
+
+<h5>Wil je deze echt verwijderen?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountTypeNavigation.Name)
+        </dd>
+    </dl>
+
+    <div class="delete-error">
+        @ViewData["Error"]
+    </div>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Verwijderen" class="btn btn-outline-dark btn-sm" />
+        <br />
+        <br />
+        <a asp-action="Index">Terug naar lijst</a>
+    </form>
+</div>
+<div class="footer-spacing">
+
+</div>
+
+

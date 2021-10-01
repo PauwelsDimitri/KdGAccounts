@@ -1,0 +1,150 @@
+﻿@model Accounts.Models.Kdgaccount
+
+@{
+    ViewData["Title"] = "Nieuw account aanmaken";
+}
+
+<h4>Nieuw account aanmaken</h4>
+<hr />
+
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="FirstName" class="control-label"></label>
+				<input asp-for="FirstName" class="form-control" />
+				<span asp-validation-for="FirstName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="LastName" class="control-label"></label>(*)
+				<input asp-for="LastName" class="form-control" />
+				<span asp-validation-for="LastName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="DisplayName" class="control-label"></label>(*)
+				<input asp-for="DisplayName" class="form-control" />
+				<span asp-validation-for="DisplayName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Department" class="control-label"></label>
+				<select asp-for="Department" class="form-control" asp-items="ViewBag.Department"></select>
+				<span asp-validation-for="Department" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Domain" class="control-label"></label>
+				<select asp-for="Domain" class="form-control" asp-items="ViewBag.Domain"></select>
+				<span asp-validation-for="Domain" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AccountType" class="control-label"></label>
+				<select asp-for="AccountType" class="form-control" asp-items="ViewBag.AccountType"></select>
+			</div>
+			<div class="form-group">
+				<label asp-for="RightsGroup" class="control-label"></label>
+				<select asp-for="RightsGroup" class="form-control" asp-items="ViewBag.RightsGroup"></select>
+			</div>
+			<div class="form-group">
+				<label asp-for="AccountName" class="control-label"></label>
+				<input asp-for="AccountName" class="form-control" />
+				<span asp-validation-for="AccountName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Email" class="control-label"></label>
+				<input asp-for="Email" class="form-control" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PrivateMail" class="control-label"></label>
+				<input asp-for="PrivateMail" class="form-control" />
+				<span asp-validation-for="PrivateMail" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Telephone" class="control-label"></label>
+				<input asp-for="Telephone" class="form-control" />
+				<span asp-validation-for="Telephone" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Office" class="control-label"></label>
+				<input asp-for="Office" class="form-control" />
+				<span asp-validation-for="Office" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="MifareSerial" class="control-label"></label>
+				<input asp-for="MifareSerial" class="form-control" />
+				<span asp-validation-for="MifareSerial" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="InitialPassword" class="control-label"></label>
+				<input asp-for="InitialPassword" class="form-control" />
+				<span asp-validation-for="InitialPassword" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Facilities" class="control-label"></label>
+				<input asp-for="Facilities" class="form-control" readonly="readonly" />
+				<span asp-validation-for="Facilities" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="checkbox" asp-for="HideFromAddressLists" class="checkbox-inline" />
+				<label asp-for="HideFromAddressLists" class="control-label"></label>
+			</div>
+			<div class="form-group">
+				<input type="checkbox" asp-for="Active" class="checkbox-inline" />
+				<label asp-for="Active" class="control-label" id="ActiveLbl"></label>
+			</div>
+			<div class="form-group">
+				<label asp-for="StartDate" class="control-label"></label>
+				<input asp-for="StartDate" class="form-control" />
+				<span asp-validation-for="StartDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="EndDate" class="control-label"></label>
+				<input asp-for="EndDate" class="form-control" />
+				<span asp-validation-for="EndDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Ticketnr" class="control-label"></label>(*)
+				<input asp-for="Ticketnr" class="form-control" />
+				<span asp-validation-for="Ticketnr" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Aanvrager" class="control-label"></label>(*)(; om meerdere op te geven)
+				<input asp-for="Aanvrager" class="form-control" />
+				<span asp-validation-for="Aanvrager" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Opmerking" class="control-label"></label>
+				<textarea asp-for="Opmerking" rows="5" cols="40" class="form-control"></textarea>
+				<span asp-validation-for="Opmerking" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="CreateDate" class="control-label"></label>
+				<input asp-for="CreateDate" class="form-control" readonly="readonly" />
+				<span asp-validation-for="CreateDate" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="CreateBy" class="control-label"></label>
+				<input asp-for="CreateBy" class="form-control" readonly="readonly" />
+				<span asp-validation-for="CreateBy" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Aanmaken" class="btn btn-outline-dark btn-sm" />
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<span id="RGDetails"></span>
+	</div>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Index">Terug naar lijst</a>
+    </p>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

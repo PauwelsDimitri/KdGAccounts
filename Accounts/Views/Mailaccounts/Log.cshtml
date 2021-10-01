@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Accounts.Models.vwPeopleLogging>
+
+@{
+    ViewBag.Title = "Logging";
+}
+
+
+<h4>@ViewData["DisplayName"]</h4>
+<br />
+<div style="position:relative;">
+    <div style="position:absolute; left:0px;">
+        <h5>@Html.DisplayNameFor(model => model.Logdate)</h5>
+        <p>
+            @foreach (var item in Model)
+            {
+                @Html.DisplayFor(modelItem => item.Logdate)<br />
+
+            }
+        </p>
+    </div>
+
+    <div style="position:absolute; left:150px;">
+        <h5>@Html.DisplayNameFor(model => model.App)</h5>
+        <p>
+            @foreach (var item in Model)
+            {
+                @Html.DisplayFor(modelItem => item.App)<br />
+
+            }
+        </p>
+    </div>
+    <div style="position:absolute; left:320px;margin-bottom:85px;">
+        <h5>@Html.DisplayNameFor(model => model.Event)</h5>
+        <p>
+            @foreach (var item in Model)
+            {
+                @Html.DisplayFor(modelItem => item.Event)<br />
+            }
+        </p>
+    </div>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Details" asp-route-id="@ViewData["eid"]">Details</a>
+        <a asp-action="Index" asp-fragment="@ViewData["eid"]">Terug naar lijst</a>
+    </p>
+</div>
+
+
+
+

@@ -1,0 +1,46 @@
+﻿@model Accounts.Models.Kdgaccount
+
+@{
+    ViewData["Title"] = "Account wijzigen";
+}
+
+<h4>Account wijzigen</h4>
+
+<h5>@Model.DisplayName</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EmployeeId" />
+            <div class="form-group">
+                <input type="checkbox" asp-for="HideFromAddressLists" class="checkbox-inline" />
+                <label asp-for="HideFromAddressLists" class="control-label"></label>
+            </div>
+            @if (Model.AccountType != 10)
+            {
+                <div class="form-group">
+                    <input type="checkbox" asp-for="Active" class="checkbox-inline" />
+                    <label class="control-label">Actief</label>
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Opslaan" class="btn btn-outline-dark btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Index" asp-fragment="@Model.EmployeeId">Terug naar lijst</a>
+    </p>
+</div>
+

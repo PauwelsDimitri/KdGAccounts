@@ -1,0 +1,65 @@
+﻿@model Accounts.Custom.PaginatedList<Accounts.Models.AccountTypeRole>
+
+@{
+    ViewData["Title"] = "Rollen overzicht";
+}
+
+<h4>Rollen overzicht</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AccountTypeSortParm"]" asp-route-pagesize="@ViewData["PageSize"]">Accounttype</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RoleSortParm"]" asp-route-pagesize="@ViewData["PageSize"]">Rol</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountTypeNavigation.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+                <td>
+                    <a asp-action="DeleteFromIndex" asp-route-id="@item.Id">Verwijderen</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p>
+    Pagina @Model.PageIndex van @Model.TotalPages <br />
+    <a asp-action="Index" asp-route-page="@Model.PageIndex" asp-route-pagesize="25" asp-route-currentFilter="@ViewData["CurrentFilter"]">25</a> |
+    <a asp-action="Index" asp-route-page="@Model.PageIndex" asp-route-pagesize="50" asp-route-currentFilter="@ViewData["CurrentFilter"]">50</a> |
+    <a asp-action="Index" asp-route-page="@Model.PageIndex" asp-route-pagesize="75" asp-route-currentFilter="@ViewData["CurrentFilter"]">75</a> |
+    <a asp-action="Index" asp-route-page="@Model.PageIndex" asp-route-pagesize="0" asp-route-currentFilter="@ViewData["CurrentFilter"]">All</a>
+</p>
+
+<div>
+    @for (var i = 1; i <= Model.TotalPages; i++)
+    {
+        var currentDisabled = (i == Model.PageIndex) ? "disabled" : "";
+
+
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@i"
+           asp-route-pagesize="@ViewData["PageSize"]"
+           class="btn btn-outline-dark @currentDisabled">
+            @i
+        </a>;
+    }
+</div>
+
+<div class="footer-spacing">
+
+</div>
+

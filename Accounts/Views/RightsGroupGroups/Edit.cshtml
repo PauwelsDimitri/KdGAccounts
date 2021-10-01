@@ -1,0 +1,108 @@
+﻿@using Accounts.Models;
+@model Accounts.Models.Kdggroup;
+
+@{
+    IEnumerable<Kdggroup> groups = (IEnumerable<Kdggroup>)ViewData["Group"];
+    KdgrightsGroup rightsgroup = (KdgrightsGroup)ViewData["RightsGroup"];
+    IEnumerable<KdgrightsGroupPropertie> properties = (IEnumerable<KdgrightsGroupPropertie>)ViewData["RightsGroupProperties"];
+    var RGId = Model.RGId;
+}
+
+<div>
+    <h4>@rightsgroup.Name</h4>
+
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KdgRightsGroupNavigation.Name)
+        </dt>
+        <dd>
+            @rightsgroup.Name
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KdgRightsGroupNavigation.MaxEndDate)
+        </dt>
+        <dd>
+            @rightsgroup.MaxEndDate
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KdgRightsGroupNavigation.AccountType)
+        </dt>
+        <dd>
+            @rightsgroup.AccountTypeNavigation.Name
+        </dd>
+    </dl>
+    @if (properties.Count() != 0)
+    {
+        <h4>Properties</h4>
+
+        <dl class="dl-horizontal">
+            @foreach (var item in properties)
+            {
+                <dt>
+                    @item.Field (@item.Type)
+                </dt>
+                <dd>
+                    @item.Value
+                </dd>
+            }
+        </dl>
+    }
+
+    <h4>AD groepen</h4>
+    <dl class="dl-horizontal">
+        @foreach (var group in groups)
+        {
+            <dt>
+                AD Groep
+            </dt>
+            <dd>
+                @group.DisplayName (@group.Domain\@group.AccountName)
+            </dd>
+        }
+    </dl>
+
+
+</div>
+<h4>AD groep wijzigen</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="RGId" />
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Domain" class="control-label"></label>
+                <select asp-for="Domain" class="form-control" asp-items="ViewBag.Domain"></select>
+                <span asp-validation-for="Domain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccountName" class="control-label"></label>
+                <input asp-for="AccountName" class="form-control" id="GroupAccountName" />
+                <span asp-validation-for="AccountName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayName" class="control-label"></label>
+                <input asp-for="DisplayName" class="form-control" id="GroupDisplayName" />
+                <span asp-validation-for="DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Opslaan" class="btn btn-outline-dark btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Create" asp-route-id="@RGId">Terug</a>
+    </p>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

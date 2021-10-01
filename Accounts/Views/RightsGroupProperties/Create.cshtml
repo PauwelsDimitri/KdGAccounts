@@ -1,0 +1,103 @@
+﻿@using Accounts.Models;
+@model Accounts.Models.KdgrightsGroupPropertie
+
+@{
+    IEnumerable<Kdggroup> groups = (IEnumerable<Kdggroup>)ViewData["Group"];
+    KdgrightsGroup rightsgroup = (KdgrightsGroup)ViewData["RightsGroup"];
+    IEnumerable<KdgrightsGroupPropertie> properties = (IEnumerable<KdgrightsGroupPropertie>)ViewData["RightsGroupProperties"];
+    var RGId = Model.RGId;
+}
+
+<div>
+    <h4>@rightsgroup.Name</h4>
+
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KdgRightsGroupNavigation.Name)
+        </dt>
+        <dd>
+            @rightsgroup.Name
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KdgRightsGroupNavigation.MaxEndDate)
+        </dt>
+        <dd>
+            @rightsgroup.MaxEndDate
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KdgRightsGroupNavigation.AccountType)
+        </dt>
+        <dd>
+            @rightsgroup.AccountTypeNavigation.Name
+        </dd>
+    </dl>
+    <h4>Properties</h4>
+
+    <dl class="dl-horizontal">
+        @foreach (var item in properties)
+        {
+            <dt>
+                @item.Field (@item.Type)
+            </dt>
+            <dd>
+                @item.Value (<a asp-action="Edit" asp-route-id="@item.Id">Wijzig</a> | <a asp-action="Delete" asp-route-id="@item.Id">Verwijder</a> )
+            </dd>
+        }
+    </dl>
+    @if (groups.Count() != 0)
+    {
+        <h4>AD groepen</h4>
+        <dl class="dl-horizontal">
+            @foreach (var group in groups)
+            {
+                <dt>
+                    AD Groep
+                </dt>
+                <dd>
+                    @group.Domain @group.AccountName
+                </dd>
+            }
+        </dl>
+
+    }
+
+</div>
+<h4>Nieuw propertie aanmaken</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <input type="hidden" asp-for="RGId" />
+            <div class="form-group">
+                <label asp-for="Field" class="control-label"></label>
+                <input asp-for="Field" class="form-control" />
+                <span asp-validation-for="Field" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" class="form-control" asp-items="ViewBag.Types"></select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Aanmaken" class="btn btn-outline-dark btn-sm" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-controller="RightsGroups" asp-action="Index">Terug naar lijst</a> |
+        <a asp-controller="RightsGroupGroups" asp-action="Create" asp-route-id="@RGId">AD Groepen</a>
+    </p>
+</div>
+
+

@@ -1,0 +1,180 @@
+﻿@model Accounts.Models.Kdgaccount
+
+@{
+    ViewData["Title"] = "Account details";
+}
+
+<h4>Account details</h4>
+
+<div>
+    <h5>@Model.DisplayName</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DisplayName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Domain)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Domain)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountTypeNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountTypeNavigation.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RightsGroupNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RightsGroupNavigation.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+        <dt>
+            AD Account Expires
+        </dt>
+        <dd>
+            @ViewData["AccountExpires"]
+        </dd>
+        <dt>
+            AD Account LastLogon
+        </dt>
+        <dd>
+            @ViewData["LastLogon"]
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InitialPassword)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.InitialPassword)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrivateMail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrivateMail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Office)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Office)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MifareSerial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MifareSerial)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HideFromAddressLists)
+        </dt>
+        <dd>
+            @(Model.HideFromAddressLists ? "Ja" : "Nee")
+        </dd>
+        @if (Model.AccountType == 10)
+        {
+            <dt>
+                Shared mailbox
+            </dt>
+            <dd>
+                @(Model.Active ? "Nee" : "Ja")
+            </dd>
+        }
+        else
+        {
+            <dt>
+                Actief
+            </dt>
+            <dd>
+                @(Model.Active ? "Ja" : "Nee")
+            </dd>
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ticketnr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ticketnr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Aanvrager)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Aanvrager)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Opmerking)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Opmerking)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+    </dl>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Wijzig</a> |
+        <a asp-action="Log" asp-route-id="@Model.EmployeeId">Log</a> |
+        <a asp-action="Index" asp-fragment="@Model.EmployeeId">Terug naar lijst</a>
+    </p>
+</div>

@@ -1,0 +1,44 @@
+﻿@model Accounts.Models.Kdggroup
+@{
+    ViewData["Title"] = "AD groep verwijderen";
+    var RGId = Model.RGId;
+}
+
+<h4>AD groep verwijderen</h4>
+
+<h5>Wil je deze echt verwijderen?</h5>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Domain)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Domain)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DisplayName)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Verwijderen" class="btn btn-outline-dark btn-sm" />
+        <br />
+        <br />
+        <a asp-action="Create" asp-route-id="@RGId">Terug</a>
+    </form>
+</div>
+<div class="footer-spacing">
+
+</div>
+

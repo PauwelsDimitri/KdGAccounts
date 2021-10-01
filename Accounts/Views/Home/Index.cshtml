@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Accounts</h2>
+
+        @if (User.IsInRole("Account"))
+        {
+            <ul>
+                <li><a asp-area="" asp-controller="Accounts" asp-action="Index">Alle Accounts</a></li>
+                <li><a asp-area="" asp-controller="Accounts" asp-action="Create">Nieuw account aanmaken</a></li>
+            </ul>
+        }
+        @if (User.IsInRole("Mailaccount"))
+        {
+            <ul>
+                <li><a asp-area="" asp-controller="Mailaccounts" asp-action="Index">Mailaccounts</a></li>
+                <li><a asp-area="" asp-controller="Mailaccounts" asp-action="Create">Nieuw mailaccount aanmaken</a></li>
+            </ul>
+        }
+        <ul>
+            <li><a asp-area="" asp-controller="Myaccounts" asp-action="Index">Mijn accounts</a></li>
+        </ul>
+        @if (User.IsInRole("Admin"))
+        {
+            <h2>Instellingen</h2>
+
+            <ul>
+                <li><a asp-area="" asp-controller="AccountTypes" asp-action="Index">Accounttypes</a></li>
+                <li><a asp-area="" asp-controller="AccountTypes" asp-action="Create">Nieuw accounttype aanmaken</a></li>
+                <li><a asp-area="" asp-controller="AccountTypeRoles" asp-action="Index">Rollen overzicht</a></li>
+            </ul>
+            <ul>
+                <li><a asp-area="" asp-controller="RightsGroups" asp-action="Index">Rechtengroepen</a></li>
+                <li><a asp-area="" asp-controller="RightsGroups" asp-action="Create">Nieuwe rechtengroep aanmaken</a></li>
+            </ul>
+        }
+    </div>
+    <div class="col-md-3">
+        <h2> </h2>
+       
+    </div>
+    <div class="col-md-3">
+        <h2> </h2>
+        
+    </div>
+    <div class="col-md-3">
+        <h2> </h2>
+        
+    </div>
+</div>

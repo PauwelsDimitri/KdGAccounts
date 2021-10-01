@@ -1,0 +1,41 @@
+﻿@model Accounts.Models.KdgrightsGroup
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>Details</h4>
+
+<div>
+    <h5>@Model.Name</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaxEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountTypeNavigation.Name)
+        </dd>
+    </dl>
+</div>
+<div class="footer-spacing">
+
+</div>
+<div class="footer-links">
+    <p>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Wijzig</a> |
+        <a asp-action="Index">Terug naar lijst</a>
+    </p>
+</div>

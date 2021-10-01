@@ -1,0 +1,166 @@
+﻿@model Accounts.Custom.PaginatedList<Accounts.Models.Kdgaccount>
+
+@{
+    ViewData["Title"] = "Accounts";
+    var extendstr = "";
+}
+
+
+<h4>Accounts</h4>
+
+<p>
+    <a asp-action="Create">Nieuw account aanmaken</a>
+</p>
+<form asp-action="Index" method="get" class="form-inline">
+    <div class="form-actions no-color">
+        <p>
+            <div class="form-group">
+                <input type="text" name="searchString" class="search-control mr-3" value="@ViewData["currentFilter"]" />
+                <input type="submit" value="Zoeken" class="btn btn-outline-dark search-btn btn-sm" />
+            </div>
+        </p>
+    </div>
+</form>
+<table class="table table-responsive-sm ">
+    <thead>
+        <tr>
+            <th scope="col">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DisplayNameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pagesize="@ViewData["PageSize"]">Weergavenaam</a>
+            </th>
+            <th>
+                E-mail
+            </th>
+            <th scope="col">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ActiveSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pagesize="@ViewData["PageSize"]">Actief</a>
+            </th>
+            <th scope="col">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["EndDateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pagesize="@ViewData["PageSize"]">Einddatum</a>
+            </th>
+            <th scope="col">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AanvragerSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pagesize="@ViewData["PageSize"]">Aanvrager</a>
+            </th>
+            <th scope="col">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreateDateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pagesize="@ViewData["PageSize"]">Aanmaakdatum</a>
+            </th>
+            <th scope="col">
+                Account Type
+            </th>
+            <th scope="col">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RightsGroupSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]" asp-route-pagesize="@ViewData["PageSize"]">Rechtengroep</a>
+            </th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var tblrowClass = "table-default";
+            extendstr = "";
+            if (item.Aanvrager.Length > 30) {extendstr = "..."; }
+            if (item.EndDate <= DateTime.Now)
+            {
+                tblrowClass = "table-danger";
+            }
+            else
+            {
+                if (item.StartDate > DateTime.Now)
+                {
+                    tblrowClass = "table-danger";
+                }
+                else
+                {
+                    if (item.Active)
+                    {
+                        if (item.AccountType == 10)
+                        {
+                            tblrowClass = "table-warning";
+                        }
+                    }
+
+                }
+            }
+            <tr class="@tblrowClass">
+                <td>
+                    <a id="@item.EmployeeId"></a>
+                    @Html.DisplayFor(modelItem => item.DisplayName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @(item.Active ? "Ja" : "Nee")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @item.Aanvrager.Substring(0, (item.Aanvrager.Length > 30) ? 30 : item.Aanvrager.Length)@extendstr
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountTypeNavigation.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RightsGroupNavigation.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EmployeeId">Wijzig</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    Pagina @Model.PageIndex van @Model.TotalPages <br />
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-page="@Model.PageIndex" asp-route-pagesize="25" asp-route-currentFilter="@ViewData["CurrentFilter"]">25</a> |
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-page="@Model.PageIndex" asp-route-pagesize="50" asp-route-currentFilter="@ViewData["CurrentFilter"]">50</a> |
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-page="@Model.PageIndex" asp-route-pagesize="75" asp-route-currentFilter="@ViewData["CurrentFilter"]">75</a> |
+    <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-page="@Model.PageIndex" asp-route-pagesize="0" asp-route-currentFilter="@ViewData["CurrentFilter"]">All</a>
+</p>
+
+<div>
+    @for (var i = 1; i <= Model.TotalPages; i++)
+                {
+                    var currentDisabled = (i == Model.PageIndex) ? "btn-outline-secondary disabled" : "btn-outline-dark";
+                    if ((i == 1) || (i == Model.TotalPages) || ((i > Model.PageIndex - 5) && (i < Model.PageIndex + 5)) || (i == (i / 10) * 10))
+                    {
+            <a asp-action="Index"
+                           asp-route-sortOrder="@ViewData["CurrentSort"]"
+                           asp-route-page="@i"
+                           asp-route-pagesize="@ViewData["PageSize"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn @currentDisabled">
+                @i
+            </a>;
+        }
+        if ((i == Model.PageIndex - 5) || (i == Model.PageIndex + 5))
+        {
+            <span>
+                . . . .
+            </span>;
+        }
+    }
+</div>
+
+<div class="mailaccount-notice">
+    <p>
+        Bij het Account Type "Mailaccount" heeft Actief volgende betekenis:
+        <ul>
+            <li>Nee = Shared Mailbox (de bijhorende account is disabled)</li>
+            <li>Ja = Shared User (de bijhorende account is enabled)</li>
+        </ul>
+        Rood = einddatum in het verleden of startdatum in de toekomst</br>
+        Geel = active mailaccount (Shared User)
+    </p>
+
+</div>
+<div class="footer-spacing">
+
+</div>

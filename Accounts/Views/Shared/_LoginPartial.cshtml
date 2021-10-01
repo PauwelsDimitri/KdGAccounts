@@ -1,0 +1,15 @@
+@using System.Security.Principal
+
+@if (User.Identity.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right mr-0 ml-auto">
+        <li class="navbar-username">@User.Identity.Name.ToLower()</li>
+        <li><a asp-area="AzureAD" asp-controller="Account" asp-action="SignOut">Afmelden</a></li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right ">
+        <li><a asp-area="AzureAD" asp-controller="Account" asp-action="SignIn">Aanmelden</a></li>
+    </ul>
+}
